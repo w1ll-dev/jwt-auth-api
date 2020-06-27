@@ -21,5 +21,16 @@ app.post("/login", (req, res, next) => {
 })
 
 app.post("/logout", (req, res) => res.json({auth: false, token: null}))
-// app.get("/users", (req, res) => res.json(data))
-// app.get("/", (req, res) => res.send("<h2>Hello World</h2>"))
+
+const verifyJWT = (req, res, next) => {
+    const token = req.headers["x-access-token"]
+    if(!token) return res.status(401).json({auth: false, message: "no token provided"})
+    
+    jwt.verify(token, secret, (err, decoded) => {
+        if(err) return res.status(500).json({auth: false, message: "Failed to authenticate token"})
+
+        // if all its ok
+        req.userId = decoded.id;
+        next();
+    })
+}
