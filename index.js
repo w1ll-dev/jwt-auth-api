@@ -8,26 +8,30 @@ const secret = "willzimeosegredo"
 app.listen(port, (req, res) => console.log(`server running on port ${port}`))
 
 app.post("/login", (req, res, next) => {
-    for(user of data){
-        if(req.body.name === user.name && req.body.pswd === user.pswd){
-            // res.send(user.fruit)
+    for (user of data) {
+        if (req.body.name === user.name && req.body.pswd === user.pswd) {
             // auth === true
             const id = 1
-            const token = jwt.sign({ id }, secret, { expiresIn: 300})
-            return res.json({auth: true, token: token})
+            const token = jwt.sign({ id }, secret, { expiresIn: 300 })
+            return res.json({ auth: true, token: token })
         }
     }
     res.status(500).send("invalid user or password")
 })
 
-app.post("/logout", (req, res) => res.json({auth: false, token: null}))
+app.post("/logout", (req, res) => res.json({ auth: false, token: null }))
+
+app.get("/fruits", verifyJWT, (req, res, next) => {
+    console.log("Return all data")
+    res.json(data)
+})
 
 const verifyJWT = (req, res, next) => {
     const token = req.headers["x-access-token"]
-    if(!token) return res.status(401).json({auth: false, message: "no token provided"})
-    
+    if (!token) return res.status(401).json({ auth: false, message: "no token provided" })
+
     jwt.verify(token, secret, (err, decoded) => {
-        if(err) return res.status(500).json({auth: false, message: "Failed to authenticate token"})
+        if (err) return res.status(500).json({ auth: false, message: "Failed to authenticate token" })
 
         // if all its ok
         req.userId = decoded.id;
