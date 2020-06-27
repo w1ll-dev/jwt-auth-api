@@ -1,12 +1,12 @@
 [
     {
         "name": "will",
-        "pwd": 123, 
+        "pswd": "123", 
         "fruit": "apple"
     },
     {
         "name": "yandra",
-        "pwd": 456, 
+        "pswd": "456", 
         "fruit": "banana"
     }
 ]

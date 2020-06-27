@@ -1,14 +1,18 @@
 const express = require("express")
 const jwt = require("jsonwebtoken")
+const bodyParser = require("body-parser")
 const app = express()
 const port = 8080
 const data = require("./data/data.json")
 const secret = "willzimeosegredo"
 
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
 app.listen(port, (req, res) => console.log(`server running on port ${port}`))
 
-app.post("/login", (req, res, next) => {
-    for (user of data) {
+app.post("/login", (req, res) => {
+    for (let user of data) {
         if (req.body.name === user.name && req.body.pswd === user.pswd) {
             // auth === true
             const id = 1
@@ -20,11 +24,6 @@ app.post("/login", (req, res, next) => {
 })
 
 app.post("/logout", (req, res) => res.json({ auth: false, token: null }))
-
-app.get("/fruits", verifyJWT, (req, res, next) => {
-    console.log("Return all data")
-    res.json(data)
-})
 
 const verifyJWT = (req, res, next) => {
     const token = req.headers["x-access-token"]
@@ -38,3 +37,11 @@ const verifyJWT = (req, res, next) => {
         next();
     })
 }
+
+app.get("/fruits", verifyJWT, (req, res, next) => {
+    console.log("Return logged user fruit")
+    for(user of data){
+        if(req.body.name === user.name)
+        res.send(user.fruit)
+    }
+})
