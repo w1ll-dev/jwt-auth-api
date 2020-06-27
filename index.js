@@ -19,5 +19,7 @@ app.post("/login", (req, res, next) => {
     }
     res.status(500).send("invalid user or password")
 })
+
+app.post("/logout", (req, res) => res.json({auth: false, token: null}))
 // app.get("/users", (req, res) => res.json(data))
 // app.get("/", (req, res) => res.send("<h2>Hello World</h2>"))
