@@ -1,4 +1,12 @@
-{
-    "id": "1",
-    "name": "Will Marcio"
-}
+[
+    {
+        "name": "will",
+        "pwd": 123, 
+        "fruit": "apple"
+    },
+    {
+        "name": "yandra",
+        "pwd": 456, 
+        "fruit": "banana"
+    }
+]
