@@ -3,10 +3,5 @@
         "name": "will",
         "pswd": "123", 
         "fruit": "apple"
-    },
-    {
-        "name": "yandra",
-        "pswd": "456", 
-        "fruit": "banana"
     }
 ]
