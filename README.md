@@ -1,2 +1,2 @@
-![autg_jwt](https://user-images.githubusercontent.com/52263928/86406027-ca126a00-bc88-11ea-9d12-1260c2f42e86.png)
+![auth_jwt](https://user-images.githubusercontent.com/52263928/86406376-62105380-bc89-11ea-941e-f6e5cc1ee7fd.png)
 
